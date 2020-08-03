@@ -1,6 +1,7 @@
 # Container image that runs your code
-FROM node
+FROM python:3
 
+RUN apt-get install node
 RUN npm install -g prettier
 
 COPY . .
