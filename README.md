@@ -1,26 +1,26 @@
-# black-suggest
+# prettier-suggest
 
-GitHub action that suggests edits from the black autoformatter for Python
+GitHub action that suggests edits from the Prettier autoformatter
 
 # Installing
 
-Create and commit `.github/workflows/black-suggest.yml` in your repo.
+Create and commit `.github/workflows/prettier-suggest.yml` in your repo.
 
 ```yml
-name: Run Black on Pull Request
+name: Run Prettier on Pull Request
 
 on:
   pull_request:
 
 jobs:
-  black-suggest:
+  prettier-suggest:
     runs-on: ubuntu-latest
     steps:
       # Check out the repository
       - uses: actions/checkout@v2
 
       # Run the action that comments with suggestions
-      - uses: cloudtostreet/black-suggest@v1
+      - uses: cloudtostreet/prettier-suggest@v1
         with:
           # The access token is needed to be able to make comments
           access-token: ${{ secrets.GITHUB_TOKEN }}
