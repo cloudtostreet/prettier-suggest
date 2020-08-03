@@ -1,7 +1,11 @@
 # Container image that runs your code
 FROM ubuntu
 
-RUN apt-get update && apt-get install python node
+
+RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+
+RUN apt-get update
+RUN apt-get install nodejs python
 
 RUN npm install -g prettier
 
