@@ -7,6 +7,7 @@ SOURCE_PATH=$2
 cd $(dirname $SOURCE_PATH)
 
 # Format the files within SOURCE_PATH that have changed in the pull request
+git fetch origin master
 prettier $(join <(find $SOURCE_PATH -type f | sort) <(git diff --name-only origin/master | sort)) --write
 
 # Export the changes as a patch file
