@@ -10,7 +10,7 @@ import requests
 
 from unidiff import PatchSet
 
-COMMENT_TEXT = """The `black` formatter suggests these changes. To automatically format your code before committing, consider [enabling `black` autoformatting in your editor](https://github.com/psf/black/blob/master/docs/editor_integration.md)."""
+COMMENT_TEXT = """The `prettier` formatter suggests these changes. To automatically format your code before committing, consider [enabling `prettier` autoformatting in your editor](https://prettier.io/docs/en/editors.html)."""
 
 BODY_TEMPLATE = """{}
 
@@ -128,8 +128,8 @@ def suggest_changes(comment, suggestion, path, begin, end, context):
         "body": BODY_TEMPLATE.format(comment, suggestion),
         "commit_id": context["commit_id"],
         "path": path,
-        # Represents whether the last line is an addition or deletion. Since black
-        # is always reformatting, they will always be additions, so we use "RIGHT"
+        # Represents whether the last line is an addition or deletion. Since we're
+        # always reformatting, they will always be additions, so we use "RIGHT"
         "side": "RIGHT",
         "line": end,
         "start_line": begin,

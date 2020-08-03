@@ -1,16 +1,15 @@
-name: Run Black on PR
+name: Run Prettier on PR
 inputs:
-    access-token:
-      description: "GitHub access token"
-      required: true
-    path:
-      description: "Directory to run Black on"
-      required: true
-      default: .
+  access-token:
+    description: "GitHub access token"
+    required: true
+  path:
+    description: "Directory to run Prettier on"
+    required: true
+    default: .
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"
   args:
     - ${{ inputs.access-token }}
     - ${{ inputs.path }}
-
