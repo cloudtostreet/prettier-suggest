@@ -1,8 +1,11 @@
 # Container image that runs your code
 FROM python:3
 
-RUN apt-get install node
+RUN apt install node
 RUN npm install -g prettier
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
