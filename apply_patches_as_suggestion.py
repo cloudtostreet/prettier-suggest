@@ -223,6 +223,8 @@ def suggest_all_changes(diff_path, context, changed_files=[]):
                 for partial_suggestion in parse_suggestions_from_hunk(hunk)
             )
 
+    print(f"Making {len(suggestions)} on the pull request")
+
     last_path = None
     for path, begin, end, suggestion in suggestions:
         if last_path != path:
