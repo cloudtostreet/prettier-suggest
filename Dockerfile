@@ -5,7 +5,7 @@ RUN apt-get update -y
 RUN apt-get install -y curl
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 
-RUN apt-get install -y nodejs python3
+RUN apt-get install -y nodejs python3 python3-pip
 
 RUN npm install -g prettier
 
