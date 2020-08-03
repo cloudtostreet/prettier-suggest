@@ -1,5 +1,7 @@
 # Container image that runs your code
-FROM python:3
+FROM alpine
+
+RUN apk add --no-cache python node
 
 RUN npm install -g prettier
 
