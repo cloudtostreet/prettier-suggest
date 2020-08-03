@@ -10,7 +10,7 @@ RUN apt-get install -y nodejs python3
 RUN npm install -g prettier
 
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
