@@ -186,15 +186,6 @@ def parse_suggestions_from_hunk(hunk):
             source_start = predecessor_group[0].source_line_no
             source_end = predecessor_group[-1].source_line_no
             suggestion_lines = added_group
-        elif predecessor_group_type == " ":
-            # If the predecessor group is context (i.e., unchanged lines),
-            # just comment over the last line in that group
-            source_start = predecessor_group[-1].source_line_no
-            source_end = predecessor_group[-1].source_line_no
-
-            # Make sure to include the line we're commenting on in the
-            # suggestion so it doesn't get deleted
-            suggestion_lines = [predecessor_group[-1], *added_group]
         elif predecessor_group_type == "+":
             raise Exception(
                 f"Invariant violated. Consecutive '+' groups at indices "
@@ -203,9 +194,18 @@ def parse_suggestions_from_hunk(hunk):
                 f"Second group: '''{''.join(line.value for line in added_group)}'''"
             )
         else:
-            raise Exception(
-                f"Unexpected predecessor group type {predecessor_group_type}"
-            )
+            # If the predecessor group is context (i.e., unchanged lines),
+            # just comment over the last line in that group
+            source_start = predecessor_group[-1].source_line_no
+            source_end = predecessor_group[-1].source_line_no
+
+            # Make sure to include the line we're commenting on in the
+            # suggestion so it doesn't get deleted
+            suggestion_lines = [predecessor_group[-1], *added_group]
+
+            # NOTE this block also handles edge cases (LINE_TYPE_EMPTY,
+            # LINE_TYPE_NO_NEWLINE) as if they were context. Let's hope it
+            # works.
 
         # Join all lines and remove trailing newline
         suggestion = "".join(line.value for line in suggestion_lines)[:-1]
