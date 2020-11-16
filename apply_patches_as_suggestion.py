@@ -195,12 +195,16 @@ def parse_suggestions_from_hunk(hunk):
             # Make sure to include the line we're commenting on in the
             # suggestion so it doesn't get deleted
             suggestion_lines = [predecessor_group[-1], *added_group]
-        else:
+        elif predecessor_group_type == "+":
             raise Exception(
                 f"Invariant violated. Consecutive '+' groups at indices "
                 f"{added_group_index - 1}, {added_group_index}:\n"
-                f"{''.join(line.value for line in predecessor_group)}\n"
-                f"{''.join(line.value for line in added_group)}"
+                f"First group: '''{''.join(line.value for line in predecessor_group)}'''\n"
+                f"Second group: '''{''.join(line.value for line in added_group)}'''"
+            )
+        else:
+            raise Exception(
+                f"Unexpected predecessor group type {predecessor_group_type}"
             )
 
         # Join all lines and remove trailing newline
