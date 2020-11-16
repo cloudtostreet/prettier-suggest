@@ -197,7 +197,10 @@ def parse_suggestions_from_hunk(hunk):
             suggestion_lines = [predecessor_group[-1], *added_group]
         else:
             raise Exception(
-                f"Invariant violated. Consecutive '+' groups at indices {added_group_index - 1}, {added_group_index}:\n{''.join(predecessor_group)}\n{''.join(added_group)}"
+                f"Invariant violated. Consecutive '+' groups at indices "
+                f"{added_group_index - 1}, {added_group_index}:\n"
+                f"{''.join(line.value for line in predecessor_group)}\n"
+                f"{''.join(line.value for line in added_group)}"
             )
 
         # Join all lines and remove trailing newline
@@ -251,7 +254,7 @@ if __name__ == "__main__":
     with open(os.environ["GITHUB_EVENT_PATH"], "r") as github_event_file:
         github_event = json.load(github_event_file)
 
-    print('Reading GitHub event file: ')
+    print("Reading GitHub event file: ")
     pprint(github_event)
 
     context = {

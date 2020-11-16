@@ -28,3 +28,14 @@ jobs:
           # The directory to run the formatter on. "." for everything.
           path: "."
 ```
+
+# Updating
+
+This is pretty much entirely counter to the point of having versions, but I move the `v1` tag up every time I update the repo.
+
+```sh
+git tag -d v1 \
+  && git push origin --delete v1 \
+  && git tag v1 \
+  && git push origin --tags
+```
